@@ -1,3 +1,5 @@
+import app from 'firebase/app'
+
 const {
   REACT_APP_API_KEY,
   REACT_APP_AUTH_DOMAIN,
@@ -15,3 +17,11 @@ const config = {
   storageBucket: REACT_APP_STORAGE_BUCKET,
   messagingSenderId: REACT_APP_SENDER_ID
 }
+
+class Firebase {
+  constructor () {
+    app.initializeApp(config)
+  }
+}
+
+export default Firebase
