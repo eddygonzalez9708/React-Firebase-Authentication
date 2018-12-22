@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-rouer-dom'
+import { Link } from 'react-router-dom'
 
 import * as ROUTES from '../../constants/routes'
 
