@@ -20,6 +20,12 @@ class SignUpForm extends Component {
     this.state = {...INITIAL_STATE}
   }
 
+  onChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
   onSubmit = event => {
     event.preventDefault()
 
@@ -31,19 +37,13 @@ class SignUpForm extends Component {
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
-        .then(authUser => {
+        .then(() => {
           this.setState({ ...INITIAL_STATE })
           this.props.history.push(ROUTES.HOME)
         })
         .catch(error => {
           this.setState({ error })
         })
-  }
-
-  onChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
   }
 
   render () {
