@@ -1,11 +1,15 @@
 import React from 'react'
+import { AuthUserContext } from '../Session'
 
 import NavigationAuth from '../NavigationAuth'
 import NavigationNonAuth from '../NavigationNonAuth'
 
-const Navigation = ({ authUser }) => (
+const Navigation = () => (
   <div>
-    {authUser ? <NavigationAuth /> : <NavigationNonAuth />}
+    <AuthUserContext.Consumer>
+      {authUser =>
+        authUser ? <NavigationAuth /> : <NavigationNonAuth />}
+    </AuthUserContext.Consumer>
   </div>
 )
 
