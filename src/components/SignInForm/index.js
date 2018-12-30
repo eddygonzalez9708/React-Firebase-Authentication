@@ -74,8 +74,7 @@ class SignInForm extends Component {
 
 export default compose(
   withRouter,
-  withFirebase
-)(SignInForm)
+  withFirebase)(SignInForm)
 
 
 

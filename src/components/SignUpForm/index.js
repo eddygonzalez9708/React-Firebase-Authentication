@@ -6,7 +6,6 @@ import { compose } from 'recompose'
 import * as ROUTES from '../../constants/routes'
 
 const INITIAL_STATE = {
-  username: '', 
   email: '',
   passwordOne: '',
   passwordTwo: '',
@@ -17,7 +16,7 @@ class SignUpForm extends Component {
   constructor (props) {
     super(props)
     
-    this.state = {...INITIAL_STATE}
+    this.state = { ...INITIAL_STATE }
   }
 
   onChange = event => {
@@ -30,7 +29,6 @@ class SignUpForm extends Component {
     event.preventDefault()
 
     const {
-      username,
       email,
       passwordOne
     } = this.state
