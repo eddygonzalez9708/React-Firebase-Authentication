@@ -7,7 +7,7 @@ const { PASSWORD_FORGET } = ROUTES
 
 const PasswordForgetLink = () => (
   <p>
-    <Link to={PASSWORD_FORGET}>Forget Password?</Link>
+    <Link to={PASSWORD_FORGET}>Forgot Password?</Link>
   </p>
 )
 
