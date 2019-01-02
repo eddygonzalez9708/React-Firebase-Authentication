@@ -1,6 +1,7 @@
 import React from 'react'
-import PasswordChange from '../PasswordChange'
 import { AuthUserContext, withAuthorization } from '../Session'
+
+import PasswordChange from '../PasswordChange'
 
 const condition = authUser => !!authUser
 
