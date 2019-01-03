@@ -5,7 +5,10 @@ import { compose } from 'recompose'
 
 import * as ROUTES from '../../constants/routes'
 
+const { HOME } = ROUTES
+
 const INITIAL_STATE = {
+  username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
@@ -29,15 +32,24 @@ class SignUpForm extends Component {
     event.preventDefault()
 
     const {
+      username,
       email,
       passwordOne
     } = this.state
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
+        .then(authUser => {
+          this.props.firebase
+            .user(authUser.user.uid)
+            .set({
+              username,
+              email
+            })
+        })
         .then(() => {
           this.setState({ ...INITIAL_STATE })
-          this.props.history.push(ROUTES.HOME)
+          this.props.history.push(HOME)
         })
         .catch(error => {
           this.setState({ error })
