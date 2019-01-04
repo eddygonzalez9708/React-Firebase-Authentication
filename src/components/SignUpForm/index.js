@@ -4,14 +4,17 @@ import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
 import * as ROUTES from '../../constants/routes'
+import * as ROLES from '../../constants/roles'
 
 const { HOME } = ROUTES
+const { ADMIN } = ROLES
 
 const INITIAL_STATE = {
   username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
+  isAdmin: false,
   error: null
 }
 
@@ -34,8 +37,15 @@ class SignUpForm extends Component {
     const {
       username,
       email,
-      passwordOne
+      passwordOne,
+      isAdmin
     } = this.state
+
+    const roles = []
+
+    if (isAdmin) {
+      roles.push(ADMIN)
+    }
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -44,7 +54,8 @@ class SignUpForm extends Component {
             .user(authUser.user.uid)
             .set({
               username,
-              email
+              email,
+              roles
             })
         })
         .then(() => {
@@ -56,12 +67,19 @@ class SignUpForm extends Component {
         })
   }
 
+  onChangeCheckbox = event => {
+    this.setState({
+      [event.target.name]: event.target.checked
+    })
+  }
+
   render () {
     const {
       username,
       email,
       passwordOne,
       passwordTwo,
+      isAdmin,
       error
     } = this.state
     
@@ -101,6 +119,15 @@ class SignUpForm extends Component {
           type='password'
           placeholder='Confirm Password'
         />
+        <label>
+          Admin:
+          <input 
+            name='isAdmin'
+            type='checkbox'
+            checked={isAdmin}
+            onChange={this.onChangeCheckbox}
+          />
+        </label>
         <button disabled={isInvalid} type='submit'>Sign Up</button>
         {error && <p>{error.message}</p>}
       </form>
