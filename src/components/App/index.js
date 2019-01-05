@@ -14,18 +14,28 @@ import Admin from '../Admin'
 
 import * as ROUTES from '../../constants/routes'
 
+const {
+  LANDING,
+  SIGN_UP,
+  SIGN_IN,
+  PASSWORD_FORGET,
+  HOME,
+  ACCOUNT,
+  ADMIN
+} = ROUTES
+
 const App = () => {
   return (
     <div>
       <Navigation />
       <hr />
-      <Route exact path={ROUTES.LANDING} component={Landing} />
-      <Route exact path={ROUTES.SIGN_UP} component={SignUp} />
-      <Route exact path={ROUTES.SIGN_IN} component={SignIn} />
-      <Route exact path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
-      <Route exact path={ROUTES.HOME} component={Home} />
-      <Route exact path={ROUTES.ACCOUNT} component={Account} />
-      <Route exact path={ROUTES.ADMIN} component={Admin} />
+      <Route exact path={LANDING} component={Landing} />
+      <Route exact path={SIGN_UP} component={SignUp} />
+      <Route exact path={SIGN_IN} component={SignIn} />
+      <Route exact path={PASSWORD_FORGET} component={PasswordForget} />
+      <Route exact path={HOME} component={Home} />
+      <Route exact path={ACCOUNT} component={Account} />
+      <Route exact path={ADMIN} component={Admin} />
     </div>
   )
 }
