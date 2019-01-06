@@ -3,7 +3,7 @@ import React from 'react'
 const UserList = ({ users }) => (
   <ul>
     {users.map(user => (
-      <li key={user.id}>
+      <li key={user.uid}>
         <span>
           <strong>ID:</strong> {user.uid}
         </span>
