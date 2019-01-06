@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
+import { compose } from 'recompose'
 import { withFirebase } from '../Firebase'
+import { withAuthorization } from '../Session'
 
 import UserList from '../UserList'
 
-// import { withAuthorization } from '../Session'
+import * as ROLES from '../../constants/roles'
 
-// import * as ROLES from '../../constants/roles'
+const { ADMIN } = ROLES 
 
-// const { ADMIN } = ROLES 
-
-// const condition = authUser => authUser && authUser.roles.includes(ADMIN)
+const condition = authUser => authUser && authUser.roles.includes(ADMIN)
 
 class Admin extends Component {
   constructor (props) {
@@ -58,5 +58,7 @@ class Admin extends Component {
   }
 }
 
-// export default withAuthorization(condition)(Admin)
-export default withFirebase(Admin)
+export default compose(
+  withAuthorization(condition),
+  withFirebase
+)(Admin)

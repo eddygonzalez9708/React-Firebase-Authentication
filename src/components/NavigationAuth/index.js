@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import SignOut from '../SignOut'
 
 import * as ROUTES from '../../constants/routes'
+import * as ROLES from '../../constants/roles'
 
 const { 
  LANDING,
@@ -12,7 +13,7 @@ const {
  ADMIN
 } = ROUTES
 
-const NavigationAuth = () => (
+const NavigationAuth = ({ authUser }) => (
   <ul>
     <li>
       <Link to={LANDING}>Landing</Link>      
@@ -23,9 +24,11 @@ const NavigationAuth = () => (
     <li>
       <Link to={ACCOUNT}>Account</Link>      
     </li>
-    <li>
-      <Link to={ADMIN}>Admin</Link>      
-    </li>
+    {authUser.roles.includes(ROLES.ADMIN) && (
+      <li>
+        <Link to={ADMIN}>Admin</Link>      
+      </li>
+    )}
     <li>
       <SignOut />
     </li>
