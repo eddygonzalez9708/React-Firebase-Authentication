@@ -12,6 +12,8 @@ import Home from '../Home'
 import Account from '../Account'
 import Admin from '../Admin'
 
+/* Route strings imported */
+
 import * as ROUTES from '../../constants/routes'
 
 const {
