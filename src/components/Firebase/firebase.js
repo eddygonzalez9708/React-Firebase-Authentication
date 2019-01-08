@@ -2,6 +2,8 @@ import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 
+/* Secret Environment Variables */
+
 const {
   REACT_APP_API_KEY,
   REACT_APP_AUTH_DOMAIN,
@@ -10,6 +12,8 @@ const {
   REACT_APP_STORAGE_BUCKET,
   REACT_APP_SENDER_ID
 } = process.env 
+
+/* Configuration Object */
 
 const config = {
   apiKey: REACT_APP_API_KEY,
@@ -20,6 +24,12 @@ const config = {
   messagingSenderId: REACT_APP_SENDER_ID
 }
 
+/*
+Firebase class to encapsulate all Firebase functionalities,
+realtime database, and authentication, as well-defined API
+for the rest of the applicaiton.
+*/
+
 class Firebase {
   constructor () {
     app.initializeApp(config)
@@ -28,7 +38,7 @@ class Firebase {
     this.db = app.database()
   }
 
-  // *** Auth API *** 
+  /* Auth API */
   
   doCreateUserWithEmailAndPassword = (email, password) => {
     return this.auth.createUserWithEmailAndPassword(email, password)
@@ -50,13 +60,13 @@ class Firebase {
     return this.auth.currentUser.updatePassword(password)
   }
 
-  // *** User API ***
+  /* User API */
 
   user = uid => this.db.ref(`users/${uid}`)
 
   users = () => this.db.ref('users')
 
-  // *** Merge Auth and DB User API *** //
+  /* Merge Auth and DB User API */
 
   onAuthUserListener = (next, fallback) =>
     this.auth.onAuthStateChanged(authUser => {
@@ -66,12 +76,12 @@ class Firebase {
           .then(snapshot => {
             const dbUser = snapshot.val()
 
-            // Default empty roles
+            /* Default empty roles */
             if (!dbUser.roles) {
               dbUser.roles = []
             }
 
-            // Merge auth and db user
+            /* Merge auth and db user */
             authUser = {
               uid: authUser.uid,
               email: authUser.email,
