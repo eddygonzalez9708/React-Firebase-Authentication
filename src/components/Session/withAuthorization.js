@@ -4,6 +4,8 @@ import { withFirebase } from '../Firebase'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
+/* Route strings imported */
+
 import * as ROUTES from '../../constants/routes'
 
 const { SIGN_IN } = ROUTES
