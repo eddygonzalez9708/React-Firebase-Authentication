@@ -34,33 +34,58 @@ class Firebase {
   constructor () {
     app.initializeApp(config)
 
+    // Instatiate Authentication Package */
+
     this.auth = app.auth()
+    
+    /* Instantiate Real Time Database Package */
+
     this.db = app.database()
   }
 
   /* Auth API */
+
+  /*
+  Sign up method (registration) takes email and password
+  parameters for its function signature and uses an official
+  Firebase API endpoint to create a user.
+  */
   
   doCreateUserWithEmailAndPassword = (email, password) => {
     return this.auth.createUserWithEmailAndPassword(email, password)
   }
 
+  /* Sign in method */
+
   doSignInWithEmailAndPassword = (email, password) => {
     return this.auth.signInWithEmailAndPassword(email, password)
   }
+
+  /* Sign out method */
 
   doSignOut = () => {
     return this.auth.signOut()
   }
 
+  /* Password reset method */
+
   doPasswordReset = email => {
     return this.auth.sendPasswordResetEmail(email)
   }
+
+  /* Password update method */
 
   doPasswordUpdate = password => {
     return this.auth.currentUser.updatePassword(password)
   }
 
   /* User API */
+
+  /*
+  The paths in the ref() method match the location
+  where your entities (users) will be stored in
+  Firebase's realtime database API.
+  */
 
   user = uid => this.db.ref(`users/${uid}`)
 
